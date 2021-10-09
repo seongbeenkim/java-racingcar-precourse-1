@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Position {
 
     static final int MIN_THRESHOLD = 0;
+    private static final int INCREMENT_UNIT = 1;
 
     private final int position;
 
@@ -21,6 +22,10 @@ public class Position {
 
     public int getPosition() {
         return position;
+    }
+
+    public Position increase() {
+        return new Position(position + INCREMENT_UNIT);
     }
 
     @Override

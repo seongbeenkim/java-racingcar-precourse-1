@@ -18,9 +18,7 @@ public class PositionTest {
         Position position = new Position(currentPosition);
 
         //then
-        assertThat(position)
-                .extracting("position")
-                .isEqualTo(currentPosition);
+        assertThat(position.getPosition()).isEqualTo(currentPosition);
     }
 
     @Test
@@ -32,5 +30,18 @@ public class PositionTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Position(invalidPosition))
                 .withMessageMatching("위치는 최소 \\d+ 이상이여야 합니다.");
+    }
+
+    @Test
+    @DisplayName("위치가 1 증가한다.")
+    void increase() {
+        //given
+        Position position = new Position(0);
+
+        //when
+        position = position.increase();
+
+        //then
+        assertThat(position.getPosition()).isEqualTo(1);
     }
 }
