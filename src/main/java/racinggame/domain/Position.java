@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Position {
 
-    private static final int MIN_THRESHOLD = 0;
+    static final int MIN_THRESHOLD = 0;
 
     private final int position;
 
@@ -17,6 +17,10 @@ public class Position {
         if (position < MIN_THRESHOLD) {
             throw new IllegalArgumentException(String.format("위치는 최소 %d 이상이여야 합니다.", MIN_THRESHOLD));
         }
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     @Override
