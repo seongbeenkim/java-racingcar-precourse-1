@@ -7,8 +7,15 @@ public class Name {
     private final String name;
 
     public Name(final String name) {
+        validateNullOrEmpty(name);
         validateMaxLength(name);
         this.name = name;
+    }
+
+    private void validateNullOrEmpty(final String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("이름은 한 글자 이상이여야 합니다.");
+        }
     }
 
     private void validateMaxLength(final String name) {
