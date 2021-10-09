@@ -6,7 +6,7 @@ public class Car {
     private final Position position;
 
     public Car(final String name) {
-        this(new Name(name), new Position());
+        this(new Name(name), Position.valueOf(Position.MIN_THRESHOLD));
     }
 
     public Car(final Name name, final Position position) {

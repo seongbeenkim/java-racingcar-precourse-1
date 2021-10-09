@@ -1,35 +1,55 @@
 package racinggame.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Position {
 
-    private static final int MIN_THRESHOLD = 0;
+    protected static final int MIN_THRESHOLD = 0;
+    private static final int MAX_CACHE_THRESHOLD = 30;
     private static final int INCREMENT_UNIT = 1;
+    private static final Map<Integer, Position> CACHED_POSITIONS = createCachePositions();
 
     private final int position;
 
-    public Position() {
-        this(MIN_THRESHOLD);
-    }
-
-    public Position(final int position) {
-        validateMin(position);
+    private Position(final int position) {
         this.position = position;
     }
 
-    private void validateMin(final int position) {
+    private static Map<Integer, Position> createCachePositions() {
+        HashMap<Integer, Position> positions = new HashMap<>();
+
+        for (int i = MIN_THRESHOLD; i <= MAX_CACHE_THRESHOLD; i++) {
+            positions.put(i, new Position(i));
+        }
+
+        return positions;
+    }
+
+    public static Position valueOf(final int position) {
+        validateMinimum(position);
+        Position cachePosition = CACHED_POSITIONS.get(position);
+
+        if (cachePosition == null) {
+            return new Position(position);
+        }
+
+        return cachePosition;
+    }
+
+    private static void validateMinimum(final int position) {
         if (position < MIN_THRESHOLD) {
             throw new IllegalArgumentException(String.format("위치는 최소 %d 이상이여야 합니다.", MIN_THRESHOLD));
         }
     }
 
-    public int getPosition() {
-        return position;
+    public Position increase() {
+        return valueOf(position + INCREMENT_UNIT);
     }
 
-    public Position increase() {
-        return new Position(position + INCREMENT_UNIT);
+    public int getPosition() {
+        return position;
     }
 
     @Override
