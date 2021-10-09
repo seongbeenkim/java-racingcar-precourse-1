@@ -18,32 +18,34 @@ public class CarTest {
 
         //then
         assertThat(car.getName()).isEqualTo(name);
-        assertThat(car.getPosition()).isEqualTo(0);
+        assertThat(car.getPosition()).isZero();
     }
 
     @Test
-    @DisplayName("전진 조건이 4 이상일 경우, 전진한다.")
+    @DisplayName("전진 가능할 경우, 전진한다.")
     void move() {
         //given
         Car car = new Car("nano");
+        MoveStrategy moveStrategy = () -> true;
 
         //when
-        car = car.move(4);
+        car = car.move(moveStrategy);
 
         //then
         assertThat(car.getPosition()).isEqualTo(1);
     }
 
     @Test
-    @DisplayName("전진 조건이 3 이하일 경우, 전진하지 않는다.")
+    @DisplayName("전진 불가능할 경우, 전진하지 않는다.")
     void move_fail() {
         //given
         Car car = new Car("nano");
+        MoveStrategy moveStrategy = () -> false;
 
         //when
-        car = car.move(3);
+        car = car.move(moveStrategy);
 
         //then
-        assertThat(car.getPosition()).isEqualTo(0);
+        assertThat(car.getPosition()).isZero();
     }
 }

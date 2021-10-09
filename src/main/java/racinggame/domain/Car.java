@@ -2,8 +2,6 @@ package racinggame.domain;
 
 public class Car {
 
-    private static final int MIN_MOVABLE_CONDITION = 4;
-
     private final Name name;
     private final Position position;
 
@@ -24,8 +22,8 @@ public class Car {
         return position.getPosition();
     }
 
-    public Car move(final int randomNumber) {
-        if (randomNumber >= MIN_MOVABLE_CONDITION) {
+    public Car move(final MoveStrategy moveStrategy) {
+        if (moveStrategy.canMove()) {
             return new Car(name, position.increase());
         }
 
