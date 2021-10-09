@@ -4,10 +4,14 @@ import java.util.Objects;
 
 public class Position {
 
-    static final int MIN_THRESHOLD = 0;
+    private static final int MIN_THRESHOLD = 0;
     private static final int INCREMENT_UNIT = 1;
 
     private final int position;
+
+    public Position() {
+        this(MIN_THRESHOLD);
+    }
 
     public Position(final int position) {
         validateMin(position);

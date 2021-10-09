@@ -11,14 +11,11 @@ public class PositionTest {
     @Test
     @DisplayName("위치 객체를 생성한다.")
     void create() {
-        //given
-        int currentPosition = 0;
-
         //when
-        Position position = new Position(currentPosition);
+        Position position = new Position();
 
         //then
-        assertThat(position.getPosition()).isEqualTo(currentPosition);
+        assertThat(position.getPosition()).isEqualTo(0);
     }
 
     @Test
@@ -26,6 +23,7 @@ public class PositionTest {
     void create_fail_with_min_position() {
         //given
         int invalidPosition = -1;
+
         //when, then
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new Position(invalidPosition))
@@ -36,7 +34,7 @@ public class PositionTest {
     @DisplayName("위치가 1 증가한다.")
     void increase() {
         //given
-        Position position = new Position(0);
+        Position position = new Position();
 
         //when
         position = position.increase();
