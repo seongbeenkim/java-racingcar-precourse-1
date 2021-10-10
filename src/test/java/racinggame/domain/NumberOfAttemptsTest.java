@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class NumberOfAttemptsTest {
 
@@ -30,5 +31,32 @@ public class NumberOfAttemptsTest {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new NumberOfAttempts(-1))
                 .withMessageMatching("시도 횟수는 최소 \\d+이상이여야 합니다.");
+    }
+
+    @Test
+    @DisplayName("시도 횟수가 차감된다.")
+    void reduce() {
+        //given
+        NumberOfAttempts numberOfAttempts = new NumberOfAttempts(1);
+
+        //when
+        NumberOfAttempts leftNumberOfAttempts = numberOfAttempts.reduce();
+
+        //then
+        assertThat(leftNumberOfAttempts)
+                .extracting("numberOfAttempts")
+                .isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("시도 횟수가 남아있지 않을 경우, 예외가 발생한다.")
+    void reduce_fail_no_more_number_of_attempts() {
+        //given
+        NumberOfAttempts numberOfAttempts = new NumberOfAttempts(0);
+
+        //when, then
+        assertThatThrownBy(() -> numberOfAttempts.reduce())
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("시도 횟수가 남아있지 않습니다.");
     }
 }

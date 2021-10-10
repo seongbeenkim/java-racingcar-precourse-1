@@ -5,6 +5,7 @@ import java.util.Objects;
 public class NumberOfAttempts {
 
     private static final int MIN_THRESHOLD = 0;
+    private static final int DECREMENT_UNIT = 1;
 
     private final int numberOfAttempts;
 
@@ -17,6 +18,14 @@ public class NumberOfAttempts {
         if (numberOfAttempts < MIN_THRESHOLD) {
             throw new IllegalArgumentException(String.format("시도 횟수는 최소 %d이상이여야 합니다.", MIN_THRESHOLD));
         }
+    }
+
+    public NumberOfAttempts reduce() {
+        if (numberOfAttempts == MIN_THRESHOLD) {
+            throw new IllegalStateException("시도 횟수가 남아있지 않습니다.");
+        }
+
+        return new NumberOfAttempts(numberOfAttempts - DECREMENT_UNIT);
     }
 
     @Override
