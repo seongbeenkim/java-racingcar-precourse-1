@@ -52,6 +52,10 @@ public class Position {
         return position;
     }
 
+    public boolean isFartherThan(final Position position) {
+        return this.position > position.position;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

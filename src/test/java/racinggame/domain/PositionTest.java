@@ -2,6 +2,8 @@ package racinggame.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -41,5 +43,20 @@ public class PositionTest {
 
         //then
         assertThat(position.getPosition()).isEqualTo(1);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0, true", "1, false"})
+    @DisplayName("더 멀리 위치해있는지 비교한다.")
+    void isFartherThan(int positionValue, boolean expected) {
+        //given
+        Position positionToCompare = Position.valueOf(positionValue);
+        Position position = Position.valueOf(1);
+
+        //when
+        boolean isFartherPosition = position.isFartherThan(positionToCompare);
+
+        //then
+        assertThat(isFartherPosition).isEqualTo(expected);
     }
 }
