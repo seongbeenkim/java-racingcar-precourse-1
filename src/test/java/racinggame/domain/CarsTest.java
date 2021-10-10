@@ -70,4 +70,27 @@ public class CarsTest {
         //then
         assertThat(maxPosition.getPosition()).isEqualTo(expectedPositionValue);
     }
+
+    @Test
+    @DisplayName("가장 많이 전진한 자동차들을 반환한다.")
+    void findWinners() {
+        //given
+        Car car1 = new Car("squid", 1);
+
+        int maxPosition = 3;
+        String winnerName1 = "bear";
+        Car car2 = new Car(winnerName1, maxPosition);
+        String winnerName2 = "bird";
+        Car car3 = new Car(winnerName2, maxPosition);
+        Cars cars = new Cars(Arrays.asList(car1, car2, car3));
+
+        //when
+        List<Car> winners = cars.findWinners(Position.valueOf(maxPosition));
+
+        //then
+        assertThat(winners)
+                .extracting("name", "position")
+                .containsExactly(tuple(winnerName1, maxPosition),
+                        tuple(winnerName2, maxPosition));
+    }
 }

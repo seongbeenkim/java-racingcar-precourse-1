@@ -41,4 +41,20 @@ public class Cars {
 
         return maxPosition;
     }
+
+    public List<Car> findWinners(final Position maxPosition) {
+        List<Car> winners = new ArrayList<>();
+
+        for (Car car : this.carsCollection.list()) {
+            addWinner(winners, car, maxPosition);
+        }
+
+        return Collections.unmodifiableList(winners);
+    }
+
+    private void addWinner(final List<Car> winners, final Car car, final Position maxPosition) {
+        if (car.isSamePosition(maxPosition)) {
+            winners.add(car);
+        }
+    }
 }
