@@ -33,4 +33,12 @@ public class Car {
 
         return this;
     }
+
+    public Position getFartherPosition(final Position position) {
+        if (this.position.isFartherThan(position)) {
+            return this.position;
+        }
+
+        return position;
+    }
 }

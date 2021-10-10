@@ -2,6 +2,8 @@ package racinggame.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -47,5 +49,20 @@ public class CarTest {
 
         //then
         assertThat(car.getPosition()).isZero();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0, 1", "2, 2"})
+    @DisplayName("다른 위치와 비교하여 더 멀리 있는 위치를 반환한다.")
+    void getFartherPosition(int positionValue, int expectedPositionValue) {
+        //given
+        Car car = new Car("name", 1);
+        Position position = Position.valueOf(positionValue);
+
+        //when
+        Position fartherPosition = car.getFartherPosition(position);
+
+        //then
+        assertThat(fartherPosition.getPosition()).isEqualTo(expectedPositionValue);
     }
 }
