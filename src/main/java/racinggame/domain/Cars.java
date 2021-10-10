@@ -30,4 +30,15 @@ public class Cars {
 
         return new Cars(cars);
     }
+
+    public Position findMaxPosition() {
+        int minPositionValue = 0;
+        Position maxPosition = Position.valueOf(minPositionValue);
+
+        for (Car car : this.carsCollection.list()) {
+            maxPosition = car.getFartherPosition(maxPosition);
+        }
+
+        return maxPosition;
+    }
 }

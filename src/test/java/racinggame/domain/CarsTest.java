@@ -53,4 +53,21 @@ public class CarsTest {
                 .containsExactly(tuple(name1, position1 + incrementUnit),
                         tuple(name2, position2 + incrementUnit));
     }
+
+    @Test
+    @DisplayName("가장 많이 전진한 자동차의 위치를 반환한다.")
+    void findMaxPosition() {
+        //given
+        Car car1 = new Car("squid", 1);
+        Car car2 = new Car("bear", 2);
+        int expectedPositionValue = 3;
+        Car car3 = new Car("bird", expectedPositionValue);
+        Cars cars = new Cars(Arrays.asList(car1, car2, car3));
+
+        //when
+        Position maxPosition = cars.findMaxPosition();
+
+        //then
+        assertThat(maxPosition.getPosition()).isEqualTo(expectedPositionValue);
+    }
 }
