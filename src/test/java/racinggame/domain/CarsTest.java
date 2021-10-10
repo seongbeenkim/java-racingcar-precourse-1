@@ -55,23 +55,6 @@ public class CarsTest {
     }
 
     @Test
-    @DisplayName("가장 많이 전진한 자동차의 위치를 반환한다.")
-    void findMaxPosition() {
-        //given
-        Car car1 = new Car("squid", 1);
-        Car car2 = new Car("bear", 2);
-        int expectedPositionValue = 3;
-        Car car3 = new Car("bird", expectedPositionValue);
-        Cars cars = new Cars(Arrays.asList(car1, car2, car3));
-
-        //when
-        Position maxPosition = cars.findMaxPosition();
-
-        //then
-        assertThat(maxPosition.getPosition()).isEqualTo(expectedPositionValue);
-    }
-
-    @Test
     @DisplayName("가장 많이 전진한 자동차들을 반환한다.")
     void findWinners() {
         //given
@@ -85,7 +68,7 @@ public class CarsTest {
         Cars cars = new Cars(Arrays.asList(car1, car2, car3));
 
         //when
-        List<Car> winners = cars.findWinners(Position.valueOf(maxPosition));
+        List<Car> winners = cars.findWinners();
 
         //then
         assertThat(winners)

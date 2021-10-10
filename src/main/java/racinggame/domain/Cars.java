@@ -31,7 +31,18 @@ public class Cars {
         return new Cars(cars);
     }
 
-    public Position findMaxPosition() {
+    public List<Car> findWinners() {
+        Position maxPosition = findMaxPosition();
+        List<Car> winners = new ArrayList<>();
+
+        for (Car car : this.carsCollection.list()) {
+            addWinner(winners, car, maxPosition);
+        }
+
+        return Collections.unmodifiableList(winners);
+    }
+
+    private Position findMaxPosition() {
         int minPositionValue = 0;
         Position maxPosition = Position.valueOf(minPositionValue);
 
@@ -40,16 +51,6 @@ public class Cars {
         }
 
         return maxPosition;
-    }
-
-    public List<Car> findWinners(final Position maxPosition) {
-        List<Car> winners = new ArrayList<>();
-
-        for (Car car : this.carsCollection.list()) {
-            addWinner(winners, car, maxPosition);
-        }
-
-        return Collections.unmodifiableList(winners);
     }
 
     private void addWinner(final List<Car> winners, final Car car, final Position maxPosition) {
