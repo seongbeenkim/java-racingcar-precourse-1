@@ -2,11 +2,15 @@ package racinggame.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.tuple;
 
 public class CarsTest {
@@ -28,6 +32,39 @@ public class CarsTest {
                 .extracting("name", "position")
                 .containsExactly(tuple(name1, defaultPosition),
                         tuple(name2, defaultPosition));
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @DisplayName("null일 경우, 예외가 발생한다.")
+    void create_fail_with_cars_collection_null(CarsCollection carsCollection) {
+        //when, then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Cars(carsCollection))
+                .withMessage("자동차들이 존재하지 않습니다.");
+    }
+
+    @ParameterizedTest
+    @NullSource
+    @DisplayName("null일 경우, 예외가 발생한다.")
+    void create_fail_with_cars_list_null(List<Car> cars) {
+        //when, then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Cars(cars))
+                .withMessage("자동차들이 존재하지 않습니다.");
+    }
+
+    @Test
+    @DisplayName("자동차가 2대 미만일 경우, 예외가 발생한다.")
+    void create_fail_with_cars_min_size() {
+        //given
+        Car car = new Car("hi");
+        List<Car> cars = Collections.singletonList(car);
+
+        //when, then
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new Cars(cars))
+                .withMessageMatching("\\d+대 이상의 자동차가 존재해야 합니다.");
     }
 
     @Test

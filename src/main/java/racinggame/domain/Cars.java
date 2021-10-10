@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Cars {
 
+    private static final int MIN_CARS_SIZE = 2;
+
     private final CarsCollection carsCollection;
 
     public Cars(final List<Car> cars) {
@@ -13,7 +15,23 @@ public class Cars {
     }
 
     public Cars(final CarsCollection carsCollection) {
+        validateNull(carsCollection);
+        validateSize(carsCollection);
         this.carsCollection = carsCollection;
+    }
+
+    private void validateNull(final CarsCollection carsCollection) {
+        if (carsCollection == null || carsCollection.list() == null) {
+            throw new IllegalArgumentException("자동차들이 존재하지 않습니다.");
+        }
+    }
+
+    private void validateSize(final CarsCollection carsCollection) {
+        List<Car> cars = carsCollection.list();
+
+        if (cars.size() < MIN_CARS_SIZE) {
+            throw new IllegalArgumentException(String.format("%d대 이상의 자동차가 존재해야 합니다.", MIN_CARS_SIZE));
+        }
     }
 
     public List<Car> list() {
