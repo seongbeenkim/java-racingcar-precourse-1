@@ -59,4 +59,19 @@ public class PositionTest {
         //then
         assertThat(isFartherPosition).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, true", "2, false"})
+    @DisplayName("같은 위치인지 확인한다.")
+    void isSame(int positionValue, boolean expected) {
+        //given
+        Position positionToCompare = Position.valueOf(positionValue);
+        Position position = Position.valueOf(1);
+
+        //when
+        boolean isSame = position.isSame(positionToCompare);
+
+        //then
+        assertThat(isSame).isEqualTo(expected);
+    }
 }

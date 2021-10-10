@@ -65,4 +65,19 @@ public class CarTest {
         //then
         assertThat(fartherPosition.getPosition()).isEqualTo(expectedPositionValue);
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1, true", "2, false"})
+    @DisplayName("같은 위치인지 확인한다.")
+    void isSamePosition(int positionValue, boolean expected) {
+        //given
+        Car car = new Car("name", 1);
+        Position position = Position.valueOf(positionValue);
+
+        //when
+        boolean isSamePosition = car.isSamePosition(position);
+
+        //then
+        assertThat(isSamePosition).isEqualTo(expected);
+    }
 }

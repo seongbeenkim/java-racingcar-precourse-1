@@ -56,6 +56,10 @@ public class Position {
         return this.position > position.position;
     }
 
+    public boolean isSame(final Position position) {
+        return this.position == position.position;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
