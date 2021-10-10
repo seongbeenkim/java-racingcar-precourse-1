@@ -12,8 +12,19 @@ public class GameSystem {
     }
 
     public GameSystem(final Cars cars, final NumberOfAttempts numberOfAttempts) {
+        validateNull(cars, numberOfAttempts);
         this.cars = cars;
         this.numberOfAttempts = numberOfAttempts;
+    }
+
+    private void validateNull(final Cars cars, final NumberOfAttempts numberOfAttempts) {
+        if (cars == null) {
+            throw new IllegalArgumentException("자동차들이 존재하지 않습니다.");
+        }
+
+        if (numberOfAttempts == null) {
+            throw new IllegalArgumentException("시도 횟수가 존재하지 않습니다.");
+        }
     }
 
     public List<Car> getCars() {

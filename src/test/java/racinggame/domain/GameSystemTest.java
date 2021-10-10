@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.tuple;
 
 public class GameSystemTest {
@@ -31,6 +32,34 @@ public class GameSystemTest {
                 .extracting("name", "position")
                 .containsExactly(tuple(name1, position)
                         , tuple(name2, position));
+    }
+
+    @Test
+    @DisplayName("시도 횟수가 null일 경우, 예외가 발생한다.")
+    void create_fail_null_number_of_attempts() {
+        //given
+        String name1 = "nano1";
+        String name2 = "nano2";
+        Car car1 = new Car(name1);
+        Car car2 = new Car(name2);
+        Cars cars = new Cars(Arrays.asList(car1, car2));
+
+        //when
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new GameSystem(cars, null))
+                .withMessage("시도 횟수가 존재하지 않습니다.");
+    }
+
+    @Test
+    @DisplayName("자동차 목록이 null일 경우, 예외가 발생한다.")
+    void create_fail_null_cars() {
+        //given
+        int numberOfAttempts = 1;
+
+        //when
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new GameSystem(null, numberOfAttempts))
+                .withMessage("자동차들이 존재하지 않습니다.");
     }
 
     @ParameterizedTest
