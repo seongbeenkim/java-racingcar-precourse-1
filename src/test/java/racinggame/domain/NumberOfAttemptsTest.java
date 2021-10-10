@@ -2,6 +2,8 @@ package racinggame.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -58,5 +60,19 @@ public class NumberOfAttemptsTest {
         assertThatThrownBy(() -> numberOfAttempts.reduce())
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("시도 횟수가 남아있지 않습니다.");
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"0, true", "1, false"})
+    @DisplayName("시도 횟수가 남아있지 않는 지 확인한다.")
+    void isNothingLeft(int leftNumberOfAttempts, boolean expected) {
+        //given
+        NumberOfAttempts numberOfAttempts = new NumberOfAttempts(leftNumberOfAttempts);
+
+        //when
+        boolean isNothingLeft = numberOfAttempts.isNothingLeft();
+
+        //then
+        assertThat(isNothingLeft).isEqualTo(expected);
     }
 }

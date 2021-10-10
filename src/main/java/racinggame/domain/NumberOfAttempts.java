@@ -21,11 +21,15 @@ public class NumberOfAttempts {
     }
 
     public NumberOfAttempts reduce() {
-        if (numberOfAttempts == MIN_THRESHOLD) {
+        if (isNothingLeft()) {
             throw new IllegalStateException("시도 횟수가 남아있지 않습니다.");
         }
 
         return new NumberOfAttempts(numberOfAttempts - DECREMENT_UNIT);
+    }
+
+    public boolean isNothingLeft() {
+        return this.numberOfAttempts == MIN_THRESHOLD;
     }
 
     @Override
