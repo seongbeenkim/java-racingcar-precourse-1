@@ -64,9 +64,9 @@ public class GameSystemTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"0, true", "1, false"})
-    @DisplayName("게임이 종료된 상태인지 확인한다.")
-    void isFinished(int numberOfAttempts, boolean expected) {
+    @CsvSource(value = {"1, true", "0, false"})
+    @DisplayName("게임이 진행 상태인지 확인한다.")
+    void isNotFinished(int numberOfAttempts, boolean expected) {
         //given
         String name1 = "nano1";
         String name2 = "nano2";
@@ -75,10 +75,10 @@ public class GameSystemTest {
         GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2), numberOfAttempts);
 
         //when
-        boolean isFinished = gameSystem.isFinished();
+        boolean isNotFinished = gameSystem.isNotFinished();
 
         //then
-        assertThat(isFinished).isEqualTo(expected);
+        assertThat(isNotFinished).isEqualTo(expected);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class GameSystemTest {
 
         //then
         int incrementUnit = 1;
-        assertThat(playedGameSystem.isFinished()).isTrue();
+        assertThat(playedGameSystem.isNotFinished()).isFalse();
         assertThat(playedGameSystem.getCars())
                 .extracting("name", "position")
                 .containsExactly(tuple(name1, position1 + incrementUnit),

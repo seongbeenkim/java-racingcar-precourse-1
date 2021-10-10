@@ -31,8 +31,8 @@ public class GameSystem {
         return cars.list();
     }
 
-    public boolean isFinished() {
-        return numberOfAttempts.isNothingLeft();
+    public boolean isNotFinished() {
+        return numberOfAttempts.isRemained();
     }
 
     public GameSystem play(final MoveStrategy moveStrategy) {
