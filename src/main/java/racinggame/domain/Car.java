@@ -9,6 +9,10 @@ public class Car {
         this(new Name(name), Position.valueOf(Position.MIN_THRESHOLD));
     }
 
+    public Car(final String name, final int position) {
+        this(new Name(name), Position.valueOf(position));
+    }
+
     public Car(final Name name, final Position position) {
         this.name = name;
         this.position = position;
