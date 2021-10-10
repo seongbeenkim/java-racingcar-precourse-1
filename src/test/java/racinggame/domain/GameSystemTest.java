@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
@@ -103,5 +104,30 @@ public class GameSystemTest {
                 .extracting("name", "position")
                 .containsExactly(tuple(name1, position1 + incrementUnit),
                         tuple(name2, position2 + incrementUnit));
+    }
+
+    @Test
+    @DisplayName("우승자들을 반환한다.")
+    void getWinners() {
+        //given
+        String name1 = "nano1";
+        String name2 = "nano2";
+        String name3 = "nano3";
+        int position = 1;
+        int maxPosition = 2;
+        Car car1 = new Car(name1, position);
+        Car car2 = new Car(name2, maxPosition);
+        Car car3 = new Car(name3, maxPosition);
+        int numberOfAttempts = 1;
+        GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2, car3), numberOfAttempts);
+
+        //when
+        List<Car> winners = gameSystem.getWinners();
+
+        //then
+        assertThat(winners)
+                .extracting("name", "position")
+                .containsExactly(tuple(name2, maxPosition),
+                        tuple(name3, maxPosition));
     }
 }

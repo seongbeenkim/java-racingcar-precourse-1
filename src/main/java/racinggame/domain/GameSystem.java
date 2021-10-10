@@ -41,4 +41,8 @@ public class GameSystem {
 
         return new GameSystem(racedCars, leftNumberOfAttempts);
     }
+
+    public List<Car> getWinners() {
+        return cars.findWinners();
+    }
 }
