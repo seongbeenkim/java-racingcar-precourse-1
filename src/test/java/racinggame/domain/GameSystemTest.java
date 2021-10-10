@@ -50,4 +50,29 @@ public class GameSystemTest {
         //then
         assertThat(isFinished).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("한 시도 횟수만큼 게임을 진행한다.")
+    void play() {
+        //given
+        String name1 = "nano1";
+        String name2 = "nano2";
+        int position1 = 1;
+        int position2 = 2;
+        Car car1 = new Car(name1, position1);
+        Car car2 = new Car(name2, position2);
+        int numberOfAttempts = 1;
+        GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2), numberOfAttempts);
+
+        //when
+        GameSystem playedGameSystem = gameSystem.play(() -> true);
+
+        //then
+        int incrementUnit = 1;
+        assertThat(playedGameSystem.isFinished()).isTrue();
+        assertThat(playedGameSystem.getCars())
+                .extracting("name", "position")
+                .containsExactly(tuple(name1, position1 + incrementUnit),
+                        tuple(name2, position2 + incrementUnit));
+    }
 }

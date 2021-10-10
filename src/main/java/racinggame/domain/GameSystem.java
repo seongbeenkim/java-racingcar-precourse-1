@@ -23,4 +23,11 @@ public class GameSystem {
     public boolean isFinished() {
         return numberOfAttempts.isNothingLeft();
     }
+
+    public GameSystem play(final MoveStrategy moveStrategy) {
+        NumberOfAttempts leftNumberOfAttempts = numberOfAttempts.reduce();
+        Cars racedCars = cars.race(moveStrategy);
+
+        return new GameSystem(racedCars, leftNumberOfAttempts);
+    }
 }
