@@ -43,7 +43,7 @@ public class Controller {
         } catch (NoSuchElementException e) {
             outputView.printError(e.getMessage());
             throw e;
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             outputView.printError(e.getMessage());
             return getCars();
         }
@@ -56,7 +56,7 @@ public class Controller {
         } catch (NoSuchElementException e) {
             outputView.printError(e.getMessage());
             throw e;
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             outputView.printError(e.getMessage());
             return getNumberOfAttempts();
         }
