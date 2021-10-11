@@ -48,6 +48,14 @@ public class ApplicationTest extends NSTest {
         });
     }
 
+    @Test
+    void 시도_횟수_0_미만에_대한_예외_처리() {
+        assertSimpleTest(() -> {
+            runNoLineFound("pobi, toni, -1");
+            verify(ERROR_MESSAGE);
+        });
+    }
+
     @AfterEach
     void tearDown() {
         outputStandard();
