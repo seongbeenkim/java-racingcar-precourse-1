@@ -1,8 +1,8 @@
-package racinggame.controller;
+package racinggame.controller.dto;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racinggame.domain.Car;
+import racinggame.domain.car.Car;
 
 import java.util.Arrays;
 import java.util.List;

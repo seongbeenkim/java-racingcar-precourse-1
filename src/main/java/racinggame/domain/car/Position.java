@@ -1,4 +1,4 @@
-package racinggame.domain;
+package racinggame.domain.car;
 
 import java.util.HashMap;
 import java.util.Map;

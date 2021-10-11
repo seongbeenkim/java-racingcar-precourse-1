@@ -1,5 +1,9 @@
 package racinggame.domain;
 
+import racinggame.domain.car.Car;
+import racinggame.domain.car.Cars;
+import racinggame.domain.car.MoveStrategy;
+
 import java.util.List;
 
 public class GameSystem {

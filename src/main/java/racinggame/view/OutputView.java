@@ -1,7 +1,7 @@
 package racinggame.view;
 
-import racinggame.controller.CarsDto;
-import racinggame.controller.WinnersDto;
+import racinggame.controller.dto.CarsDto;
+import racinggame.controller.dto.WinnersDto;
 
 import java.util.List;
 

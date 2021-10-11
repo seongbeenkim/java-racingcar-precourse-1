@@ -1,11 +1,13 @@
 package racinggame.controller;
 
-import racinggame.domain.Cars;
+import racinggame.controller.dto.CarsDto;
+import racinggame.controller.dto.WinnersDto;
 import racinggame.domain.GameSystem;
-import racinggame.domain.MoveStrategy;
-import racinggame.domain.NamesToCarsCollection;
 import racinggame.domain.NumberOfAttempts;
-import racinggame.domain.RandomNumberMoveStrategy;
+import racinggame.domain.car.Cars;
+import racinggame.domain.car.MoveStrategy;
+import racinggame.domain.car.NamesToCarsCollection;
+import racinggame.domain.car.RandomNumberMoveStrategy;
 import racinggame.view.InputView;
 import racinggame.view.OutputView;
 
