@@ -57,6 +57,14 @@ public class ApplicationTest extends NSTest {
     }
 
     @Test
+    void 쉼표가_포함되지_않은_경우에_대한_예외_처리() {
+        assertSimpleTest(() -> {
+            runNoLineFound("pobi.woni");
+            verify(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
     void 시도_횟수_0_미만에_대한_예외_처리() {
         assertSimpleTest(() -> {
             runNoLineFound("pobi, toni, -1");
