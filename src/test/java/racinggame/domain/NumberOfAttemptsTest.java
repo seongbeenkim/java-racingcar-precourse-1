@@ -57,14 +57,14 @@ public class NumberOfAttemptsTest {
         NumberOfAttempts numberOfAttempts = new NumberOfAttempts(0);
 
         //when, then
-        assertThatThrownBy(() -> numberOfAttempts.reduce())
+        assertThatThrownBy(numberOfAttempts::reduce)
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("시도 횟수가 남아있지 않습니다.");
     }
 
     @ParameterizedTest
     @CsvSource(value = {"0, true", "1, false"})
-    @DisplayName("시도 횟수가 남아있지 않는 지 확인한다.")
+    @DisplayName("시도 횟수가 0인지 확인한다.")
     void isNoneLeft(int leftNumberOfAttempts, boolean expected) {
         //given
         NumberOfAttempts numberOfAttempts = new NumberOfAttempts(leftNumberOfAttempts);
@@ -78,7 +78,7 @@ public class NumberOfAttemptsTest {
 
     @ParameterizedTest
     @CsvSource(value = {"1, true", "0, false"})
-    @DisplayName("시도 횟수가 남아있는 지 확인한다.")
+    @DisplayName("시도 횟수가 1 이상인지 확인한다.")
     void isRemained(int leftNumberOfAttempts, boolean expected) {
         //given
         NumberOfAttempts numberOfAttempts = new NumberOfAttempts(leftNumberOfAttempts);

@@ -20,34 +20,33 @@ public class GameSystemTest {
     @DisplayName("자동차 게임 시스템 객체를 생성한다.")
     void create() {
         //given
-        int position = 0;
-        String name1 = "nano1";
-        String name2 = "nano2";
+        int defaultPosition = 0;
+        String name1 = "name1";
+        String name2 = "name2";
         Car car1 = new Car(name1);
         Car car2 = new Car(name2);
-        int numberOfAttempts = 1;
 
         //when
-        GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2), numberOfAttempts);
+        GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2), 1);
 
         //then
         assertThat(gameSystem.getCars())
                 .extracting("name", "position")
-                .containsExactly(tuple(name1, position)
-                        , tuple(name2, position));
+                .containsExactly(tuple(name1, defaultPosition)
+                        , tuple(name2, defaultPosition));
     }
 
     @Test
     @DisplayName("시도 횟수가 null일 경우, 예외가 발생한다.")
     void create_fail_null_number_of_attempts() {
         //given
-        String name1 = "nano1";
-        String name2 = "nano2";
+        String name1 = "name1";
+        String name2 = "name2";
         Car car1 = new Car(name1);
         Car car2 = new Car(name2);
         Cars cars = new Cars(Arrays.asList(car1, car2));
 
-        //when
+        //when, then
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new GameSystem(cars, null))
                 .withMessage("시도 횟수가 존재하지 않습니다.");
@@ -59,7 +58,7 @@ public class GameSystemTest {
         //given
         int numberOfAttempts = 1;
 
-        //when
+        //when, then
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> new GameSystem(null, numberOfAttempts))
                 .withMessage("자동차들이 존재하지 않습니다.");
@@ -70,8 +69,8 @@ public class GameSystemTest {
     @DisplayName("게임이 진행 상태인지 확인한다.")
     void isNotFinished(int numberOfAttempts, boolean expected) {
         //given
-        String name1 = "nano1";
-        String name2 = "nano2";
+        String name1 = "name1";
+        String name2 = "name2";
         Car car1 = new Car(name1);
         Car car2 = new Car(name2);
         GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2), numberOfAttempts);
@@ -87,8 +86,8 @@ public class GameSystemTest {
     @DisplayName("한 시도 횟수만큼 게임을 진행한다.")
     void play() {
         //given
-        String name1 = "nano1";
-        String name2 = "nano2";
+        String name1 = "name1";
+        String name2 = "name2";
         int position1 = 1;
         int position2 = 2;
         Car car1 = new Car(name1, position1);
@@ -112,14 +111,14 @@ public class GameSystemTest {
     @DisplayName("우승자들을 반환한다.")
     void getWinners() {
         //given
-        String name1 = "nano1";
-        String name2 = "nano2";
-        String name3 = "nano3";
-        int position = 1;
-        int maxPosition = 2;
-        Car car1 = new Car(name1, position);
-        Car car2 = new Car(name2, maxPosition);
-        Car car3 = new Car(name3, maxPosition);
+        String name1 = "name1";
+        String name2 = "name2";
+        String name3 = "name3";
+        int loserPosition = 1;
+        int winnerPosition = 2;
+        Car car1 = new Car(name1, loserPosition);
+        Car car2 = new Car(name2, winnerPosition);
+        Car car3 = new Car(name3, winnerPosition);
         int numberOfAttempts = 1;
         GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2, car3), numberOfAttempts);
 
@@ -129,7 +128,7 @@ public class GameSystemTest {
         //then
         assertThat(winners)
                 .extracting("name", "position")
-                .containsExactly(tuple(name2, maxPosition),
-                        tuple(name3, maxPosition));
+                .containsExactly(tuple(name2, winnerPosition),
+                        tuple(name3, winnerPosition));
     }
 }

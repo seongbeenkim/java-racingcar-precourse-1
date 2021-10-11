@@ -15,15 +15,15 @@ public class NameTest {
     @DisplayName("이름 객체를 생성한다.")
     void create() {
         //given
-        String personName = "jenny";
+        String carName = "name";
 
         //when
-        Name name = new Name(personName);
+        Name name = new Name(carName);
 
         //then
         assertThat(name)
                 .extracting("name")
-                .isEqualTo(personName);
+                .isEqualTo(carName);
     }
 
     @ParameterizedTest

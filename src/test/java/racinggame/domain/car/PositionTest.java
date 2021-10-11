@@ -50,8 +50,8 @@ public class PositionTest {
     @DisplayName("더 멀리 위치해있는지 비교한다.")
     void isFartherThan(int positionValue, boolean expected) {
         //given
-        Position positionToCompare = Position.valueOf(positionValue);
         Position position = Position.valueOf(1);
+        Position positionToCompare = Position.valueOf(positionValue);
 
         //when
         boolean isFartherPosition = position.isFartherThan(positionToCompare);

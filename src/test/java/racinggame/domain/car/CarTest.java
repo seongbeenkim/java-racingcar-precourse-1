@@ -13,7 +13,7 @@ public class CarTest {
     @DisplayName("자동차 객체를 생성한다")
     void create() {
         //given
-        String name = "nano";
+        String name = "name";
 
         //when
         Car car = new Car(name);
@@ -27,7 +27,7 @@ public class CarTest {
     @DisplayName("전진 가능할 경우, 전진한다.")
     void move() {
         //given
-        Car car = new Car("nano");
+        Car car = new Car("name");
         MoveStrategy moveStrategy = () -> true;
 
         //when
@@ -41,7 +41,7 @@ public class CarTest {
     @DisplayName("전진 불가능할 경우, 전진하지 않는다.")
     void move_fail() {
         //given
-        Car car = new Car("nano");
+        Car car = new Car("name");
         MoveStrategy moveStrategy = () -> false;
 
         //when
@@ -51,19 +51,34 @@ public class CarTest {
         assertThat(car.getPosition()).isZero();
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"0, 1", "2, 2"})
-    @DisplayName("다른 위치와 비교하여 더 멀리 있는 위치를 반환한다.")
-    void getFartherPosition(int positionValue, int expectedPositionValue) {
+    @Test
+    @DisplayName("다른 위치와 비교한 결과 내 위치가 더 멀리 있으므로 내 위치를 반환한다.")
+    void getFartherPosition_return_my_position() {
         //given
-        Car car = new Car("name", 1);
-        Position position = Position.valueOf(positionValue);
+        int myPosition = 1;
+        Car car = new Car("name", myPosition);
+        Position position = Position.valueOf(0);
 
         //when
         Position fartherPosition = car.getFartherPosition(position);
 
         //then
-        assertThat(fartherPosition.getPosition()).isEqualTo(expectedPositionValue);
+        assertThat(fartherPosition.getPosition()).isEqualTo(myPosition);
+    }
+
+    @Test
+    @DisplayName("다른 위치와 비교한 결과 상대방 위치가 더 멀리 있으므로 상대방 위치를 반환한다.")
+    void getFartherPosition_return_other_position() {
+        //given
+        Car car = new Car("name", 1);
+        int otherPosition = 2;
+        Position position = Position.valueOf(otherPosition);
+
+        //when
+        Position fartherPosition = car.getFartherPosition(position);
+
+        //then
+        assertThat(fartherPosition.getPosition()).isEqualTo(otherPosition);
     }
 
     @ParameterizedTest

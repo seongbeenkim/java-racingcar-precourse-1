@@ -18,8 +18,8 @@ class NamesToCarsCollectionTest {
     @DisplayName("모든 자동차를 반환한다.")
     void list() {
         //given
-        String name1 = "popo";
-        String name2 = "bobo";
+        String name1 = "name1";
+        String name2 = "name2";
         int position = 0;
         CarsCollection carsCollection = new NamesToCarsCollection(Arrays.asList(name1, name2));
 
