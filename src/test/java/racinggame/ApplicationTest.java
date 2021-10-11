@@ -32,6 +32,14 @@ public class ApplicationTest extends NSTest {
         });
     }
 
+    @Test
+    void 자동차_2대_미만에_대한_예외_처리() {
+        assertSimpleTest(() -> {
+            runNoLineFound("pobi");
+            verify(ERROR_MESSAGE);
+        });
+    }
+
     @AfterEach
     void tearDown() {
         outputStandard();
