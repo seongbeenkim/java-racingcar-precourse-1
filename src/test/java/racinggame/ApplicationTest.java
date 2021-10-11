@@ -33,9 +33,17 @@ public class ApplicationTest extends NSTest {
     }
 
     @Test
-    void 이름에_대한_예외_처리() {
+    void 이름_5글자_초과에_대한_예외_처리() {
         assertSimpleTest(() -> {
             runNoLineFound("pobi,javaji");
+            verify(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void 이름_공백에_대한_예외_처리() {
+        assertSimpleTest(() -> {
+            runNoLineFound("pobi,");
             verify(ERROR_MESSAGE);
         });
     }
