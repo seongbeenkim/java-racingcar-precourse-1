@@ -1,7 +1,15 @@
 package racinggame;
 
+import racinggame.controller.Controller;
+import racinggame.view.InputView;
+import racinggame.view.OutputView;
+
 public class Application {
+
     public static void main(String[] args) {
-        // TODO 자동차 경주 게임 구현
+        InputView inputView = new InputView();
+        OutputView outputView = new OutputView();
+        Controller controller = new Controller(inputView, outputView);
+        controller.run();
     }
 }
