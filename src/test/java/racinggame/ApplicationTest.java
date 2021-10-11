@@ -25,6 +25,14 @@ public class ApplicationTest extends NSTest {
     }
 
     @Test
+    void 다수의_우승자() {
+        assertRandomTest(() -> {
+            run("pobi,woni,doni", "1");
+            verify("pobi : -", "woni : -", "doni : ", "최종 우승자는 pobi, woni 입니다.");
+        }, MOVING_FORWARD, MOVING_FORWARD, STOP);
+    }
+
+    @Test
     void 이름에_대한_예외_처리() {
         assertSimpleTest(() -> {
             runNoLineFound("pobi,javaji");
