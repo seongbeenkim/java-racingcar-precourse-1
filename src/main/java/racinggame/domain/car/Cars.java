@@ -8,26 +8,26 @@ public class Cars {
 
     private static final int MIN_CARS_SIZE = 2;
 
-    private final CarsCollection carsCollection;
+    private final CarCollection carCollection;
 
     public Cars(final List<Car> cars) {
         this(() -> cars);
     }
 
-    public Cars(final CarsCollection carsCollection) {
-        validateNull(carsCollection);
-        validateSize(carsCollection);
-        this.carsCollection = carsCollection;
+    public Cars(final CarCollection carCollection) {
+        validateNull(carCollection);
+        validateSize(carCollection);
+        this.carCollection = carCollection;
     }
 
-    private void validateNull(final CarsCollection carsCollection) {
-        if (carsCollection == null || carsCollection.list() == null) {
+    private void validateNull(final CarCollection carCollection) {
+        if (carCollection == null || carCollection.list() == null) {
             throw new IllegalArgumentException("자동차들이 존재하지 않습니다.");
         }
     }
 
-    private void validateSize(final CarsCollection carsCollection) {
-        List<Car> cars = carsCollection.list();
+    private void validateSize(final CarCollection carCollection) {
+        List<Car> cars = carCollection.list();
 
         if (cars.size() < MIN_CARS_SIZE) {
             throw new IllegalArgumentException(String.format("%d대 이상의 자동차가 존재해야 합니다.", MIN_CARS_SIZE));
@@ -35,13 +35,13 @@ public class Cars {
     }
 
     public List<Car> list() {
-        return Collections.unmodifiableList(carsCollection.list());
+        return Collections.unmodifiableList(carCollection.list());
     }
 
     public Cars race(final MoveStrategy moveStrategy) {
         List<Car> cars = new ArrayList<>();
 
-        for (Car car : this.carsCollection.list()) {
+        for (Car car : this.carCollection.list()) {
             Car movedCar = car.move(moveStrategy);
             cars.add(movedCar);
         }
@@ -53,7 +53,7 @@ public class Cars {
         Position maxPosition = findMaxPosition();
         List<Car> winners = new ArrayList<>();
 
-        for (Car car : this.carsCollection.list()) {
+        for (Car car : this.carCollection.list()) {
             addWinner(winners, car, maxPosition);
         }
 
@@ -64,7 +64,7 @@ public class Cars {
         int minPositionValue = 0;
         Position maxPosition = Position.valueOf(minPositionValue);
 
-        for (Car car : this.carsCollection.list()) {
+        for (Car car : this.carCollection.list()) {
             maxPosition = car.getFartherPosition(maxPosition);
         }
 

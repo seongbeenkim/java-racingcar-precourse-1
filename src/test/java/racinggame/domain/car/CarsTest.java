@@ -22,10 +22,10 @@ public class CarsTest {
         int defaultPosition = 0;
         String name1 = "name1";
         String name2 = "name2";
-        CarsCollection carsCollection = new NamesToCarsCollection(Arrays.asList(name1, name2));
+        CarCollection carCollection = new NamesToCarCollection(Arrays.asList(name1, name2));
 
         //when
-        Cars cars = new Cars(carsCollection);
+        Cars cars = new Cars(carCollection);
 
         //then
         assertThat(cars.list())
@@ -37,10 +37,10 @@ public class CarsTest {
     @ParameterizedTest
     @NullSource
     @DisplayName("null일 경우, 예외가 발생한다.")
-    void create_fail_with_cars_collection_null(CarsCollection nullCarsCollection) {
+    void create_fail_with_cars_collection_null(CarCollection nullCarCollection) {
         //when, then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new Cars(nullCarsCollection))
+                .isThrownBy(() -> new Cars(nullCarCollection))
                 .withMessage("자동차들이 존재하지 않습니다.");
     }
 

@@ -6,7 +6,7 @@ import racinggame.domain.GameSystem;
 import racinggame.domain.NumberOfAttempts;
 import racinggame.domain.car.Cars;
 import racinggame.domain.car.MoveStrategy;
-import racinggame.domain.car.NamesToCarsCollection;
+import racinggame.domain.car.NamesToCarCollection;
 import racinggame.domain.car.RandomNumberMoveStrategy;
 import racinggame.view.InputView;
 import racinggame.view.OutputView;
@@ -39,7 +39,7 @@ public class Controller {
     private Cars getCars() {
         try {
             List<String> carNames = inputView.getCarNames();
-            return new Cars(new NamesToCarsCollection(carNames));
+            return new Cars(new NamesToCarCollection(carNames));
         } catch (NoSuchElementException e) {
             outputView.printError(e.getMessage());
             throw e;

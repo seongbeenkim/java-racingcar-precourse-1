@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.tuple;
 
-class NamesToCarsCollectionTest {
+class NamesToCarCollectionTest {
 
     @Test
     @DisplayName("모든 자동차를 반환한다.")
@@ -21,10 +21,10 @@ class NamesToCarsCollectionTest {
         String name1 = "name1";
         String name2 = "name2";
         int position = 0;
-        CarsCollection carsCollection = new NamesToCarsCollection(Arrays.asList(name1, name2));
+        CarCollection carCollection = new NamesToCarCollection(Arrays.asList(name1, name2));
 
         //when
-        List<Car> cars = carsCollection.list();
+        List<Car> cars = carCollection.list();
 
         //then
         assertThat(cars)
@@ -39,7 +39,7 @@ class NamesToCarsCollectionTest {
     void create_fail(List<String> names) {
         //when, then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new NamesToCarsCollection(names))
+                .isThrownBy(() -> new NamesToCarCollection(names))
                 .withMessage("하나 이상의 이름이 존재해야합니다.");
     }
 }

@@ -3,11 +3,11 @@ package racinggame.domain.car;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NamesToCarsCollection implements CarsCollection {
+public class NamesToCarCollection implements CarCollection {
 
     private final List<String> names;
 
-    public NamesToCarsCollection(final List<String> names) {
+    public NamesToCarCollection(final List<String> names) {
         validateNullOrEmpty(names);
         this.names = new ArrayList<>(names);
     }
