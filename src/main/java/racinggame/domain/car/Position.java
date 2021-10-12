@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Position {
 
-    protected static final int MIN_THRESHOLD = 0;
+    static final int MIN_THRESHOLD = 0;
     private static final int MAX_CACHE_THRESHOLD = 30;
     private static final int INCREMENT_UNIT = 1;
     private static final Map<Integer, Position> CACHED_POSITIONS = createCachePositions();

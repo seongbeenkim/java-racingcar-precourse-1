@@ -13,7 +13,7 @@ public class RandomNumberMoveStrategy implements MoveStrategy {
         return generateRandomNumber() >= MIN_MOVABLE_CONDITION;
     }
 
-    protected int generateRandomNumber() {
+    int generateRandomNumber() {
         return Randoms.pickNumberInRange(MIN_THRESHOLD, MAX_THRESHOLD);
     }
 }

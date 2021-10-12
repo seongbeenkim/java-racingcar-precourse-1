@@ -13,7 +13,7 @@ class RandomNumberMoveStrategyTest {
         //given
         RandomNumberMoveStrategy moveStrategy = new RandomNumberMoveStrategy() {
             @Override
-            protected int generateRandomNumber() {
+            int generateRandomNumber() {
                 return 4;
             }
         };
@@ -31,7 +31,7 @@ class RandomNumberMoveStrategyTest {
         //given
         RandomNumberMoveStrategy moveStrategy = new RandomNumberMoveStrategy() {
             @Override
-            protected int generateRandomNumber() {
+            int generateRandomNumber() {
                 return 3;
             }
         };
