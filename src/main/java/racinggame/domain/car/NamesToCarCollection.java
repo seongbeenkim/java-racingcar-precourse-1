@@ -5,11 +5,11 @@ import java.util.List;
 
 public class NamesToCarCollection implements CarCollection {
 
-    private final List<String> names;
+    private final List<Car> cars;
 
     public NamesToCarCollection(final List<String> names) {
         validateNullOrEmpty(names);
-        this.names = new ArrayList<>(names);
+        this.cars = createCars(names);
     }
 
     private void validateNullOrEmpty(final List<String> names) {
@@ -18,14 +18,18 @@ public class NamesToCarCollection implements CarCollection {
         }
     }
 
-    @Override
-    public List<Car> list() {
+    private List<Car> createCars(final List<String> names) {
         List<Car> cars = new ArrayList<>();
 
         for (String name : names) {
             cars.add(new Car(name));
         }
 
+        return cars;
+    }
+
+    @Override
+    public List<Car> list() {
         return cars;
     }
 }
