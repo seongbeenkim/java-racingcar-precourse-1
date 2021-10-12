@@ -1,7 +1,7 @@
 package racinggame.controller;
 
-import racinggame.controller.dto.CarsDto;
-import racinggame.controller.dto.WinnersDto;
+import racinggame.controller.dto.CarsResponse;
+import racinggame.controller.dto.WinnersResponse;
 import racinggame.domain.GameSystem;
 import racinggame.domain.NumberOfAttempts;
 import racinggame.domain.car.Cars;
@@ -67,11 +67,11 @@ public class Controller {
 
         while (gameSystem.isNotFinished()) {
             gameSystem = gameSystem.play(moveStrategy);
-            CarsDto carsDto = new CarsDto(gameSystem.getCars());
-            outputView.printRoundResult(carsDto);
+            CarsResponse carsResponse = new CarsResponse(gameSystem.getCars());
+            outputView.printRoundResult(carsResponse);
         }
 
-        WinnersDto winnersDto = new WinnersDto(gameSystem.getWinners());
-        outputView.printWinners(winnersDto);
+        WinnersResponse winnersResponse = new WinnersResponse(gameSystem.getWinners());
+        outputView.printWinners(winnersResponse);
     }
 }

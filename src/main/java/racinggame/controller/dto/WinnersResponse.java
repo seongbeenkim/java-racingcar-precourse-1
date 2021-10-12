@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class WinnersDto {
+public class WinnersResponse {
 
     private final List<String> names;
 
-    public WinnersDto(final List<Car> winners) {
+    public WinnersResponse(final List<Car> winners) {
         this.names = extractNames(winners);
     }
 

@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CarsDto {
+public class CarsResponse {
 
     private List<String> names;
     private List<Integer> positions;
 
-    public CarsDto(final List<Car> cars) {
+    public CarsResponse(final List<Car> cars) {
         List<String> names = new ArrayList<>();
         List<Integer> positions = new ArrayList<>();
 
