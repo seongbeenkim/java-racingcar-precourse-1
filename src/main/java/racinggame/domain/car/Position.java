@@ -29,13 +29,7 @@ public class Position {
 
     public static Position valueOf(final int position) {
         validateMinimum(position);
-        Position cachePosition = CACHED_POSITIONS.get(position);
-
-        if (cachePosition == null) {
-            return new Position(position);
-        }
-
-        return cachePosition;
+        return CACHED_POSITIONS.getOrDefault(position, new Position(position));
     }
 
     private static void validateMinimum(final int position) {
