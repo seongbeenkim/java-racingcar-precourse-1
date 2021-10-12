@@ -6,16 +6,16 @@ import racinggame.domain.car.MoveStrategy;
 
 import java.util.List;
 
-public class GameSystem {
+public class RacingGame {
 
     private final Cars cars;
     private final NumberOfAttempts numberOfAttempts;
 
-    public GameSystem(final List<Car> cars, final int numberOfAttempts) {
+    public RacingGame(final List<Car> cars, final int numberOfAttempts) {
         this(new Cars(cars), new NumberOfAttempts(numberOfAttempts));
     }
 
-    public GameSystem(final Cars cars, final NumberOfAttempts numberOfAttempts) {
+    public RacingGame(final Cars cars, final NumberOfAttempts numberOfAttempts) {
         validateNull(cars, numberOfAttempts);
         this.cars = cars;
         this.numberOfAttempts = numberOfAttempts;
@@ -39,11 +39,11 @@ public class GameSystem {
         return numberOfAttempts.isRemained();
     }
 
-    public GameSystem play(final MoveStrategy moveStrategy) {
+    public RacingGame play(final MoveStrategy moveStrategy) {
         NumberOfAttempts leftNumberOfAttempts = numberOfAttempts.reduce();
         Cars racedCars = cars.race(moveStrategy);
 
-        return new GameSystem(racedCars, leftNumberOfAttempts);
+        return new RacingGame(racedCars, leftNumberOfAttempts);
     }
 
     public List<Car> getWinners() {

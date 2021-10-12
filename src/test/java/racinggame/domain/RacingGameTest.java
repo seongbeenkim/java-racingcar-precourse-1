@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.Assertions.tuple;
 
-public class GameSystemTest {
+public class RacingGameTest {
 
     @Test
     @DisplayName("자동차 게임 시스템 객체를 생성한다.")
@@ -27,10 +27,10 @@ public class GameSystemTest {
         Car car2 = new Car(name2);
 
         //when
-        GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2), 1);
+        RacingGame racingGame = new RacingGame(Arrays.asList(car1, car2), 1);
 
         //then
-        assertThat(gameSystem.getCars())
+        assertThat(racingGame.getCars())
                 .extracting("name", "position")
                 .containsExactly(tuple(name1, defaultPosition)
                         , tuple(name2, defaultPosition));
@@ -48,7 +48,7 @@ public class GameSystemTest {
 
         //when, then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new GameSystem(cars, null))
+                .isThrownBy(() -> new RacingGame(cars, null))
                 .withMessage("시도 횟수가 존재하지 않습니다.");
     }
 
@@ -60,7 +60,7 @@ public class GameSystemTest {
 
         //when, then
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new GameSystem(null, numberOfAttempts))
+                .isThrownBy(() -> new RacingGame(null, numberOfAttempts))
                 .withMessage("자동차들이 존재하지 않습니다.");
     }
 
@@ -73,10 +73,10 @@ public class GameSystemTest {
         String name2 = "name2";
         Car car1 = new Car(name1);
         Car car2 = new Car(name2);
-        GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2), numberOfAttempts);
+        RacingGame racingGame = new RacingGame(Arrays.asList(car1, car2), numberOfAttempts);
 
         //when
-        boolean isNotFinished = gameSystem.isNotFinished();
+        boolean isNotFinished = racingGame.isNotFinished();
 
         //then
         assertThat(isNotFinished).isEqualTo(expected);
@@ -93,15 +93,15 @@ public class GameSystemTest {
         Car car1 = new Car(name1, position1);
         Car car2 = new Car(name2, position2);
         int numberOfAttempts = 1;
-        GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2), numberOfAttempts);
+        RacingGame racingGame = new RacingGame(Arrays.asList(car1, car2), numberOfAttempts);
 
         //when
-        GameSystem playedGameSystem = gameSystem.play(() -> true);
+        RacingGame playedRacingGame = racingGame.play(() -> true);
 
         //then
         int incrementUnit = 1;
-        assertThat(playedGameSystem.isNotFinished()).isFalse();
-        assertThat(playedGameSystem.getCars())
+        assertThat(playedRacingGame.isNotFinished()).isFalse();
+        assertThat(playedRacingGame.getCars())
                 .extracting("name", "position")
                 .containsExactly(tuple(name1, position1 + incrementUnit),
                         tuple(name2, position2 + incrementUnit));
@@ -120,10 +120,10 @@ public class GameSystemTest {
         Car car2 = new Car(name2, winnerPosition);
         Car car3 = new Car(name3, winnerPosition);
         int numberOfAttempts = 1;
-        GameSystem gameSystem = new GameSystem(Arrays.asList(car1, car2, car3), numberOfAttempts);
+        RacingGame racingGame = new RacingGame(Arrays.asList(car1, car2, car3), numberOfAttempts);
 
         //when
-        List<Car> winners = gameSystem.getWinners();
+        List<Car> winners = racingGame.getWinners();
 
         //then
         assertThat(winners)

@@ -2,8 +2,8 @@ package racinggame.controller;
 
 import racinggame.controller.dto.CarsResponse;
 import racinggame.controller.dto.WinnersResponse;
-import racinggame.domain.GameSystem;
 import racinggame.domain.NumberOfAttempts;
+import racinggame.domain.RacingGame;
 import racinggame.domain.car.Cars;
 import racinggame.domain.car.MoveStrategy;
 import racinggame.domain.car.NamesToCarCollection;
@@ -25,15 +25,15 @@ public class Controller {
     }
 
     public void run() {
-        GameSystem gameSystem = initializeGameSystem();
+        RacingGame racingGame = initializeGame();
         MoveStrategy moveStrategy = new RandomNumberMoveStrategy();
-        playGame(gameSystem, moveStrategy);
+        playGame(racingGame, moveStrategy);
     }
 
-    private GameSystem initializeGameSystem() {
+    private RacingGame initializeGame() {
         Cars cars = getCars();
         NumberOfAttempts numberOfAttempts = getNumberOfAttempts();
-        return new GameSystem(cars, numberOfAttempts);
+        return new RacingGame(cars, numberOfAttempts);
     }
 
     private Cars getCars() {
@@ -51,8 +51,8 @@ public class Controller {
 
     private NumberOfAttempts getNumberOfAttempts() {
         try {
-            int inputNumberOfAttempts = inputView.getNumberOfAttempts();
-            return new NumberOfAttempts(inputNumberOfAttempts);
+            int numberOfAttempts = inputView.getNumberOfAttempts();
+            return new NumberOfAttempts(numberOfAttempts);
         } catch (NoSuchElementException e) {
             outputView.printError(e.getMessage());
             throw e;
@@ -62,16 +62,16 @@ public class Controller {
         }
     }
 
-    private void playGame(GameSystem gameSystem, final MoveStrategy moveStrategy) {
+    private void playGame(RacingGame racingGame, final MoveStrategy moveStrategy) {
         outputView.printPlayResult();
 
-        while (gameSystem.isNotFinished()) {
-            gameSystem = gameSystem.play(moveStrategy);
-            CarsResponse carsResponse = new CarsResponse(gameSystem.getCars());
+        while (racingGame.isNotFinished()) {
+            racingGame = racingGame.play(moveStrategy);
+            CarsResponse carsResponse = new CarsResponse(racingGame.getCars());
             outputView.printRoundResult(carsResponse);
         }
 
-        WinnersResponse winnersResponse = new WinnersResponse(gameSystem.getWinners());
+        WinnersResponse winnersResponse = new WinnersResponse(racingGame.getWinners());
         outputView.printWinners(winnersResponse);
     }
 }
